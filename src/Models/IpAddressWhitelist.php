@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Atendwa\Whitelist\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use Atendwa\Filakit\Contracts\ModelHasIcon;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class IpAddressWhitelist extends Model implements ModelHasIcon
