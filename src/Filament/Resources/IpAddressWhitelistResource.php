@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Atendwa\Whitelist\Filament\Resources;
 
+use Filament\Schemas\Schema;
 use Atendwa\Filakit\Concerns\CustomizesFilamentResource;
 use Atendwa\Filakit\Resource;
 use Atendwa\Whitelist\Filament\Resources\IpAddressWhitelistResource\Pages\CreateIpAddressWhitelist;
@@ -12,11 +13,10 @@ use Atendwa\Whitelist\Filament\Resources\IpAddressWhitelistResource\Pages\ListIp
 use Atendwa\Whitelist\Filament\Resources\IpAddressWhitelistResource\Pages\ViewIpAddressWhitelist;
 use Atendwa\Whitelist\Models\IpAddressWhitelist;
 use Filament\Clusters\Cluster;
-use Filament\Forms\Components\Fieldset;
+use Filament\Schemas\Components\Fieldset;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\ToggleButtons;
-use Filament\Forms\Form;
 use Filament\Resources\Pages\PageRegistration;
 use Filament\Tables\Table;
 use Throwable;
@@ -76,12 +76,12 @@ class IpAddressWhitelistResource extends Resource
         };
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
         $required = boolval(config('whitelist.user.is_required'));
 
-        return $form->schema([
-            Fieldset::make('')->columns()->schema([
+        return $schema->components([
+            \Filament\Schemas\Components\Fieldset::make('')->columns()->schema([
                 Select::make('user_id')->searchable()->required($required)->nullable(! $required)
                     ->relationship('user', asString(config('whitelist.user.title_attribute'))),
 
