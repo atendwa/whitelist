@@ -18,7 +18,7 @@ class WhitelistServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(__DIR__ . '/../../config/whitelist.php', 'whitelist');
-        $this->app->singleton('whitelist', fn (): Whitelist => new Whitelist());
+        $this->app->singleton('whitelist', fn (): Whitelist => new Whitelist);
 
         AliasLoader::getInstance()->alias('whitelisted', AllowWhitelistedIps::class);
         Gate::policy(IpAddressWhitelist::class, IpAddressWhitelistPolicy::class);
